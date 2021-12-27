@@ -1,0 +1,13 @@
+﻿@model ICollection<UserDto>
+@{
+    ViewData["Title"] = "Show chats";
+}
+<div>
+    @foreach (var user in Model)
+    {
+        <a asp-action="ShowChatWithUser" asp-route-id="@user.Id">@user.Name @user.LastName</a><br>
+    }
+</div>
+
+
+

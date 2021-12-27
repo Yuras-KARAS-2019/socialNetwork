@@ -1,0 +1,23 @@
+﻿@model CredentialsDto
+@{
+    ViewData["Title"] = "Home Page";
+    var user = Global.User;
+}
+
+@if (user is null)
+{
+    <form asp-action="Index" asp-controller="Home" method="post" asp-anti-forgery="true">
+        <label>Login <input type="text" asp-for="Login"></label>
+        <label>Password <input type="password" asp-for="Password"></label>
+        <button type="submit">Sign in</button>
+    </form>
+    <div asp-validation-summary="ModelOnly"></div>
+}
+else
+{
+    <h2>Welcome @user.Name @user.LastName!</h2>
+    <form asp-action="SignOut" asp-controller="Home" method="post" asp-anti-forgery="true">
+        <button type="submit">Sign out</button>
+    </form>
+}
+

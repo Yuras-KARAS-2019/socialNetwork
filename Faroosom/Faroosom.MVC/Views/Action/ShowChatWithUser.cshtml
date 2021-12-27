@@ -1,0 +1,41 @@
+﻿@model ICollection<MessageDto>
+@{
+    ViewData["Title"] = "Show chats";
+    var user = Global.User;
+    var id = Context.Request.Query["id"].ToString();
+    if (id == "")
+    {
+        id = Context.Request.Path.Value.Split('/').Last();
+    }
+}
+@foreach (var message in Model)
+{
+    <div class="bubbleWrapper">
+        @if (message.FromId == user.Id)
+        {
+            <div class="inlineContainer own">
+                <div class="ownBubble own">
+                    @message.Text
+                </div>
+            </div><span class="own">@message.CreatedData.ToShortTimeString()</span>
+        }
+        else
+        {
+            <div class="inlineContainer">
+                <div class="otherBubble other">
+                    @message.Text
+                </div>
+            </div><span class="other">@message.CreatedData.ToShortTimeString()</span>
+        }
+    </div>
+}
+<form
+    class="msger-inputarea"
+    asp-action="SendMessageToUser"
+    method="post"
+    asp-anti-forgery="true"
+    asp-route-fromId="@user.Id"
+    asp-route-toId="@id">
+    <input type="text" class="msger-input" placeholder="Enter your message..." name="Text">
+    <button type="submit" class="msger-send-btn">Send</button>
+</form>

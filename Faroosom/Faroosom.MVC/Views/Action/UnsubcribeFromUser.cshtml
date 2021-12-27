@@ -1,0 +1,14 @@
+﻿@model ICollection<UserDto>
+@{
+    ViewData["Title"] = "Unsubcribe";
+}
+<div>
+    @foreach (var user in Model)
+    {
+        <form asp-controller="Action" asp-action="Unsubcribe" asp-route-id="@user.Id" method="post" asp-anti-forgery="true">
+            <button type="submit">@user.Name @user.LastName</button>
+        </form>
+    }
+</div>
+
+

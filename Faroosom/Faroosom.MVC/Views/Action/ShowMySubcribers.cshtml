@@ -1,0 +1,26 @@
+﻿@model ICollection<UserDto>
+@{
+    ViewData["Title"] = "Show My Subcribers";
+}
+
+<div class="table">
+    <div class="table-header">
+        <div class="header__item">Id</div>
+        <div class="header__item">Age</div>
+        <div class="header__item">Name</div>
+        <div class="header__item">LastName</div>
+        <div class="header__item">Login</div>
+    </div>
+    <div class="table-content">
+        @foreach (var user in @Model)
+        {
+            <div class="table-row">
+                <div class="table-data">@user.Id</div>
+                <div class="table-data">@user.Age</div>
+                <div class="table-data">@user.Name</div>
+                <div class="table-data">@user.LastName</div>
+                <div class="table-data">@user.Login</div>
+            </div>
+        }
+    </div>
+</div>
